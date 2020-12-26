@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "222163335673",
+    "project_id": "rnnews-a7156",
+    "storage_bucket": "rnnews-a7156.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222163335673:android:a174b2f98ef349544aa528",
+        "android_client_info": {
+          "package_name": "com.rnnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222163335673-gipdklv6nb3b9593qbbk617263nte1ke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Nk5T34qy1QpEpV3wiyTYX8NVBtawVfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222163335673-gipdklv6nb3b9593qbbk617263nte1ke.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "222163335673-nr9ltgclstatr0eed00ghj5vjtrmdttq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.RNNews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

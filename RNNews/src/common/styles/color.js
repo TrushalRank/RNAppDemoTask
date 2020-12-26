@@ -4,7 +4,8 @@ const Color = {
   BLACK: '#000000',
   GREY: '#665A65',
   BLUE: '#007AFF',
-  Btn: '#6C3483',
+  Btn: '#85C1E9',
+  // Btn: '#6C3483',
 
   pink: '#FF02AD',
   black: '#000000',

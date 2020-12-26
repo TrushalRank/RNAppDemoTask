@@ -4,7 +4,7 @@ export default (styles = {
     TouchableOpacitySet: {
         alignItems: "center", 
         width: wp('90%'), 
-        backgroundColor: Color.green, 
+        backgroundColor: Color.Btn, 
         padding: ('4%'), 
         borderRadius: 15,
         marginBottom: hp('3%') 

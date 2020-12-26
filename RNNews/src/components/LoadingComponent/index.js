@@ -5,7 +5,6 @@ import styles from './styles';
 
 const LoadingComponent = ({text,value}) => {
     return (
-      
       <View style={styles.LoaderContainer}>
         <View style={styles.LoaderWrapper}>
           <ActivityIndicator

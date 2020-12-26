@@ -12,7 +12,7 @@ export default (styles = {
   LoaderWrapper: {
     width: 150,
     height: 150,
-    backgroundColor: Color.PRIMARY,
+    backgroundColor: Color.Btn,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
