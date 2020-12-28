@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Text, Image, Linking, TouchableOpacity,DeviceEventEmitter, Modal, FlatList, Button, LogBox } from 'react-native';
+import { SafeAreaView, View, Text, Image, Linking, TouchableOpacity, DeviceEventEmitter, Modal, FlatList, Button, LogBox } from 'react-native';
 import style from './style'
 import { Storage } from '../../common/localStorage';
 import AsynchStorageKey from '../../common/localStorage/AsynchStorageKey';
@@ -16,12 +16,12 @@ import { ListEvent, LoadingComponent } from '../../components/index'
 const Tab = createMaterialTopTabNavigator();
 
 function Invited1(props) {
-    console.log('nav',props.nav);
+    console.log('nav', props.nav);
     return (
         <View style={style.tabmainview} >
             <View style={style.tabviewline} />
             <View style={[style.tabview, { backgroundColor: 'white', }]}>
-                <ListEvent datamain={props.tab1} onPress={props.nav}/>
+                <ListEvent datamain={props.tab1} onPress={props.nav} />
             </View>
         </View>
     );
@@ -31,7 +31,7 @@ function Invited2(props) {
         <View style={style.tabmainview} >
             <View style={style.tabviewline} />
             <View style={[style.tabview, { backgroundColor: 'white', }]}>
-                <ListEvent datamain={props.tab2} onPress={props.nav}/>
+                <ListEvent datamain={props.tab2} onPress={props.nav} />
             </View>
         </View>
     );
@@ -41,7 +41,7 @@ function Invited3(props) {
         <View style={style.tabmainview} >
             <View style={style.tabviewline} />
             <View style={[style.tabview, { backgroundColor: 'white', }]}>
-                <ListEvent datamain={props.tab3} onPress={props.nav}/>
+                <ListEvent datamain={props.tab3} onPress={props.nav} />
             </View>
         </View>
     );
@@ -51,7 +51,7 @@ function Invited4(props) {
         <View style={style.tabmainview} >
             <View style={style.tabviewline} />
             <View style={[style.tabview, { backgroundColor: 'white', }]}>
-                <ListEvent datamain={props.tab4} onPress={props.nav}/>
+                <ListEvent datamain={props.tab4} onPress={props.nav} />
             </View>
         </View>
     );
@@ -61,7 +61,7 @@ function Invited5(props) {
         <View style={style.tabmainview} >
             <View style={style.tabviewline} />
             <View style={[style.tabview, { backgroundColor: 'white', }]}>
-                <ListEvent datamain={props.tab5} onPress={props.nav}/>
+                <ListEvent datamain={props.tab5} onPress={props.nav} />
             </View>
         </View>
     );
@@ -69,10 +69,12 @@ function Invited5(props) {
 
 
 class home extends React.Component {
-
     constructor() {
         super()
-        this.state = { value: '', tab1: [], tab2: [], tba3: [], tab4: [], tab5: [],loading: true }
+        this.state = {
+            value: '', tab1: [], tab2: [], tba3: [], tab4: [], tab5: [], loading: true, tab3name: "New York Times"
+            , tab4name: "Business", tab5name: "Bitcoin"
+        }
     }
 
     componentDidMount() {
@@ -81,13 +83,92 @@ class home extends React.Component {
                 this.props.navigation.navigate('setting')
             },
         )
+        DeviceEventEmitter.addListener(
+            'filter1', () => {
+                const data = 'popularity'
+                const param = {
+                    data
+                }
+                this.props.tab1Watcher(
+                    param,
+                    (value) => {
+                        if (value.status == "ok") {
+                            // this.setState({ tab1: value.articles, loading: false })
+                        } else {
+                            this.setState({ errorshow: true, error: 'Data not available' })
+                        }
+                    },
+                    (error) => {
+                        console.log(error)
+                    }
+                );
+            },
+        )
+        DeviceEventEmitter.addListener(
+            'filter2', () => {
+                const data = 'date'
+                const param = {
+                    data
+                }
+                this.props.tab1Watcher(
+                    param,
+                    (value) => {
+                        if (value.status == "ok") {
+                            // this.setState({ tab1: value.articles, loading: false })
+                        } else {
+                            this.setState({ errorshow: true, error: 'Data not available' })
+                        }
+                    },
+                    (error) => {
+                        console.log(error)
+                    }
+                );
+            },
+        )
+        DeviceEventEmitter.addListener(
+            'report', (data) => {
+                this.setState({ tab3name: data.name })
+            },
+        )
+        DeviceEventEmitter.addListener(
+            'country', (data) => {
+                this.setState({ tab4name: data.name })
+                const data1 = data.country
+                const param2 = {
+                    data1
+                }
+                this.props.tab4Watcher(
+                    param2,
+                    (value) => {
+                        if (value.status == "ok") {
+                            this.setState({ tab4: value.articles, loading: false })
+                            // console.log('data4',value);
+                        } else {
+                            this.setState({ errorshow: true, error: 'Data not available' })
+                        }
+                    },
+                    (error) => {
+                        console.log(error)
+                    }
+                );
+            },
+        )
+        DeviceEventEmitter.addListener(
+            'instrest', (data) => {
+                this.setState({ tab5name: data.name })
+            },
+        )
         this.interval = setInterval(() => this.setState({ loading: false }), 4000);
+        const data = 'popularity'
+        const param1 = {
+            data
+        }
         const param = '0'
         this.props.tab1Watcher(
-            param,
+            param1,
             (value) => {
                 if (value.status == "ok") {
-                    this.setState({ tab1: value.articles,loading:false })
+                    this.setState({ tab1: value.articles, loading: false })
                 } else {
                     this.setState({ errorshow: true, error: 'Data not available' })
                 }
@@ -100,7 +181,7 @@ class home extends React.Component {
             param,
             (value) => {
                 if (value.status == "ok") {
-                    this.setState({ tab2: value.articles,loading:false })
+                    this.setState({ tab2: value.articles, loading: false })
                     // console.log('data2',value);
                 } else {
                     this.setState({ errorshow: true, error: 'Data not available' })
@@ -114,7 +195,7 @@ class home extends React.Component {
             param,
             (value) => {
                 if (value.status == "ok") {
-                    this.setState({ tab3: value.articles,loading:false })
+                    this.setState({ tab3: value.articles, loading: false })
                     // console.log('data3',value);
                 } else {
                     this.setState({ errorshow: true, error: 'Data not available' })
@@ -124,11 +205,15 @@ class home extends React.Component {
                 console.log(error)
             }
         );
+        const data1 = 'us'
+        const param2 = {
+            data1
+        }
         this.props.tab4Watcher(
-            param,
+            param2,
             (value) => {
                 if (value.status == "ok") {
-                    this.setState({ tab4: value.articles,loading:false })
+                    this.setState({ tab4: value.articles, loading: false })
                     // console.log('data4',value);
                 } else {
                     this.setState({ errorshow: true, error: 'Data not available' })
@@ -142,7 +227,7 @@ class home extends React.Component {
             param,
             (value) => {
                 if (value.status == "ok") {
-                    this.setState({ tab5: value.articles,loading:false })
+                    this.setState({ tab5: value.articles, loading: false })
                     // console.log('data5',value);
                 } else {
                     this.setState({ errorshow: true, error: 'Data not available' })
@@ -184,11 +269,11 @@ class home extends React.Component {
                         style: { backgroundColor: Color.WHITE, width: wp('100%'), alignSelf: 'center' },
                         indicatorStyle: { backgroundColor: Color.Btn, },
                     }}>
-                        <Tab.Screen name="Top" children={() => <Invited1 tab1={this.state.tab1} nav={this.props.navigation}/>} />
-                        <Tab.Screen name="Recommended" children={() => <Invited2 tab2={this.state.tab2} nav={this.props.navigation}/>} />
-                        <Tab.Screen name="New York Times" children={() => <Invited3 tab3={this.state.tab3} nav={this.props.navigation}/>} />
-                        <Tab.Screen name="Business" children={() => <Invited4 tab4={this.state.tab4} nav={this.props.navigation}/>} />
-                        <Tab.Screen name="Bitcoin" children={() => <Invited5 tab5={this.state.tab5} nav={this.props.navigation}/>} />
+                        <Tab.Screen name="Top" children={() => <Invited1 tab1={this.state.tab1} nav={this.props.navigation} />} />
+                        <Tab.Screen name="Recommended" children={() => <Invited2 tab2={this.state.tab2} nav={this.props.navigation} />} />
+                        <Tab.Screen name="New York Times" options={{ title: this.state.tab3name, }} children={() => <Invited3 tab3={this.state.tab3} nav={this.props.navigation} />} />
+                        <Tab.Screen name="Business" options={{ title: this.state.tab4name, }} children={() => <Invited4 tab4={this.state.tab4} nav={this.props.navigation} />} />
+                        <Tab.Screen name="Bitcoin" options={{ title: this.state.tab5name, }} children={() => <Invited5 tab5={this.state.tab5} nav={this.props.navigation} />} />
                     </Tab.Navigator>
                 </View>
                 <Modal transparent={true} visible={this.state.loading}>

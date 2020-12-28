@@ -13,6 +13,7 @@ import HOME from '../screens/home/index'
 import Detail from '../screens/DetailNews/index'
 import Profile from '../screens/edit_profile/index'
 import Setting from '../screens/Setting/index'
+import ChangeDefultSetting from '../screens/changedefultsett/index'
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,7 @@ class AppNavigator extends React.Component {
                 <Stack.Screen name='detail' component={Detail} options={{ title: 'Details', headerShown: true, }} />
                 <Stack.Screen name='profile' component={Profile} options={{ title: 'Profile', headerShown: true, }} />
                 <Stack.Screen name='setting' component={Setting} options={{ title: 'Setting', headerShown: true, }} />
+                <Stack.Screen name='changedefultsetting' component={ChangeDefultSetting} options={{ title: 'Change defult setting', headerShown: true, }} />
             </Stack.Navigator>
         );
     }

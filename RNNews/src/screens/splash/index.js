@@ -49,7 +49,7 @@ export default class Splash extends React.Component {
 
     GetUser = async () => {
         // console.log('token', await Storage.getItem(AsynchStorageKey.loginuserid));
-        if (await Storage.getItem(AsynchStorageKey.loginuserid) != null) {
+        if (await Storage.getItem(AsynchStorageKey.loginuserid) != undefined) {
             setTimeout(() => {
                 this.Show('home')
             }, 3000);

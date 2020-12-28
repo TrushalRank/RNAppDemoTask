@@ -6,8 +6,8 @@ export default (styles = {
     backgroundColor: Color.WHITE
   },
   textinputview: {
-    width: wp('90%'), height: hp('4.5%'), marginTop: hp('1.5%')
-    , borderRadius: hp('1%'), marginHorizontal: wp('5%'), flexDirection: "row"
+    width: wp('90%'), height: hp('4.5%'),justifyContent:'space-between'
+    , borderRadius: hp('1%'), marginHorizontal: wp('5%'), flexDirection: "row",
   },
   textinput: {
     width: wp('90%'), height: hp('4.5%'), backgroundColor: Color.silverlight
@@ -16,15 +16,16 @@ export default (styles = {
   tabmainview: { flex: 1, backgroundColor: Color.WHITE },
   tabviewline: { marginTop: wp('3%'), width: wp('100%'), borderWidth: 0.5, borderColor: 'silver' },
   tabview: { flex: 1, marginTop: wp('2%'), width: wp('100%'), alignItems: 'center' },
-
+  
   buttonContainer: {
     backgroundColor: Color.WHITE,
     height: hp('15%'),
     width: wp('90%'),
     margin: wp('1%'),
-
+  
   },
   atteflatimg: { width: ('30%'), height: ('90%'), borderRadius: 10 ,alignSelf:'center'},
+  atteflatimg1: { width: wp('8%'), height: hp('4%'),tintColor:Color.silverlight,},
   attentext: {
     color: Color.black,fontWeight:'600',
     fontSize: Constants.NORMAL,
@@ -35,15 +36,16 @@ export default (styles = {
     fontSize: Constants.SMALL,
     fontFamily: Constants.FONT_REGULAR
   },
-
-  textinputview: {
-    width: wp('90%'), height: hp('4.5%'), marginVertical: hp('1.5%')
-    , borderRadius: hp('1%'), marginHorizontal: wp('5%'), flexDirection: "row"
-  },
-  textinput: {
-    width: wp('90%'), height: hp('4.5%'), backgroundColor: Color.silverlight
-    , borderRadius: hp('1%'), paddingLeft: wp('2%'), padding: 0
+  
+  btn: { height: hp('6%'), justifyContent: 'center', marginTop: wp('1%'), borderBottomWidth: 1, borderColor: Color.silverlight },
+  falsebtntext: {
+    color: Color.BLACK,
+    fontSize: Constants.LARGE,
+    fontFamily: Constants.FONT_REGULAR
   },
 
 });
 module.exports = styles;
+
+
+

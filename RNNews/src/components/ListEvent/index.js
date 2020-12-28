@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, View, Text, FlatList, Image, Share, TextInput } from 'react-native';
+import { TouchableOpacity, View, Text, FlatList, Image, Share, TextInput, Modal, DeviceEventEmitter } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import style from './style'
 import { Color, Constants } from '../../common/styles/index'
@@ -13,6 +13,7 @@ const ListEvent = ({ datamain = [], onPress }) => {
     const [arr, setArr] = useState([]);
     const [newArray, setnewArray] = useState([]);
     const [show, setShow] = useState(1);
+    const [showM, setShowM] = useState(false);
 
     const onShare = async () => {
         try {
@@ -50,10 +51,13 @@ const ListEvent = ({ datamain = [], onPress }) => {
     }
     return (
         <View>
-            <View style={style.textinputview}>
-                <TextInput style={[style.textinput, { width: wp('90%') }]}
+            <View style={[style.textinputview, { marginBottom: wp('2%') }]}>
+                <TextInput style={[style.textinput, { width: wp('78%'), }]}
                     value={text}
                     onChangeText={text => [setText(text), setArr([]), setShow(1)]} placeholder={'Search'}></TextInput>
+                <TouchableOpacity onPress={() => setShowM(true)}>
+                    <Image style={style.atteflatimg1} resizeMode='cover' source={images.img_filter} />
+                </TouchableOpacity>
             </View>
             {text != '' ?
                 <FlatList
@@ -61,7 +65,7 @@ const ListEvent = ({ datamain = [], onPress }) => {
                     data={arr}
                     renderItem={({ item, index }) => (
                         <TouchableOpacity onPress={() => onPress.navigate('detail', { item: item })} >
-                            <View style={[style.buttonContainer, { marginHorizontal: wp('5%') }]}>
+                            <View style={[style.buttonContainer, { marginHorizontal: wp('5%'), }]}>
                                 <View style={{ flex: 2.5, flexDirection: 'row' }}>
                                     <View style={{ flex: 1, marginVertical: hp('1%'), marginRight: wp('5%') }}>
                                         <Text numberOfLines={1} style={[style.attentext, { color: Color.Btn }]}>{item.source.name}</Text>
@@ -125,6 +129,27 @@ const ListEvent = ({ datamain = [], onPress }) => {
                     )}
                     keyExtractor={(item, index) => index.toString()}
                 />}
+            <Modal transparent={true} visible={showM}>
+                <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#000000aa' }}>
+                    <View style={{ height: hp('30%'), width: wp('90%'), backgroundColor: Color.WHITE, padding: wp('5%'), borderRadius: 10, marginHorizontal: wp('5%') }}>
+                        <View style={{ right: wp('3%'), top: wp('3%'), position: 'absolute' }}>
+                            <TouchableOpacity onPress={() => setShowM(false)}>
+                                <Image style={[style.atteflatimg1, { tintColor: Color.BLACK, }]} resizeMode='cover' source={images.img_close} />
+                            </TouchableOpacity>
+                        </View>
+                        <View >
+                            <Text style={{ fontFamily: Constants.FONT_REGULAR, fontSize: hp('2.5%'), alignSelf: 'center' }}>Filter</Text>
+                            <Text style={{ fontSize: hp('1.6%'), color: '#454545', alignSelf: 'center' }}>Choice your comfortable option</Text>
+                        </View>
+                        <TouchableOpacity style={style.btn} onPress={() => [DeviceEventEmitter.emit('filter1'), setShowM(false)]}>
+                            <Text style={[style.falsebtntext, { padding: wp('5%'), }]}>By Popularity</Text></TouchableOpacity>
+                        <TouchableOpacity style={style.btn} onPress={() => [DeviceEventEmitter.emit('filter2'), setShowM(false)]}>
+                            <Text style={[style.falsebtntext, { padding: wp('5%'), }]}>By Date</Text></TouchableOpacity>
+                        <TouchableOpacity style={style.btn} onPress={() => [DeviceEventEmitter.emit('filter1'), setShowM(false)]}>
+                            <Text style={[style.falsebtntext, { padding: wp('5%'), }]}>By Defult</Text></TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     )
 }
