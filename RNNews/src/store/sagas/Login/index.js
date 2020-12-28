@@ -10,13 +10,14 @@ import {
 // import { API_URL, BASE_URL } from "../../services";
 
 // 83e51e732e30406c8396ad8a0419dd5f
-const key = '83e51e732e30406c8396ad8a0419f'
+const key = '83e51e732e30406c8396ad8a0419dd5'
 
 function* onUserLogin(userLoginResendCodeAction) {
     let { payload, resolve, reject } = userLoginResendCodeAction;
+    const data = payload.data
     try {
 
-        const response = yield fetch(`http://newsapi.org/v2/everything?q=apple&from=2020-12-23&to=2020-12-25&sortBy=popularity&apiKey=${key}`, {
+        const response = yield fetch(`http://newsapi.org/v2/everything?q=apple&from=2020-12-23&to=2020-12-25&sortBy=${data}&apiKey=${key}`, {
             method: "GET",
         }).then((res) => res.json());
 
@@ -63,9 +64,10 @@ function* onUserLogin2(userLoginResendCodeAction) {
 function* onUserLogin3(userLoginResendCodeAction) {
     let { payload, resolve, reject } = userLoginResendCodeAction;
     // console.log(JSON.stringify(payload))
+    const data = payload.data1 
     try {
         const header = { "Content-Type": "application/json" };
-        const response = yield fetch(`http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${key}`, {
+        const response = yield fetch(`http://newsapi.org/v2/top-headlines?country=${data}&category=business&apiKey=${key}`, {
             method: "GET",
         }).then((res) => res.json());
 
@@ -81,7 +83,7 @@ function* onUserLogin4(userLoginResendCodeAction) {
     let { payload, resolve, reject } = userLoginResendCodeAction;
     // console.log(JSON.stringify(payload))
     try {
-        const response = yield fetch(`http://newsapi.org/v2/everything?q=bitcoin&from=2020-11-25&sortBy=publishedAt&apiKey=${key}`, {
+        const response = yield fetch(`http://newsapi.org/v2/everything?q=bitcoin&from=2020-11-28&sortBy=publishedAt&apiKey=${key}`, {
             method: "GET",
         }).then((res) => res.json());
 

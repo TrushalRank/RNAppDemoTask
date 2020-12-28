@@ -21,7 +21,7 @@ export default class profile extends React.Component {
         this.state = {
             email: '', phone: '', name: '', lastname: '', checkbox: false, id: '', pass: '', success: false, dob: '', address: '',
             error: '', errorshow: false, img: 'https://site.groupe-psa.com/content/uploads/sites/9/2016/12/white-background-2.jpg',
-            loading: false
+            loading: true
         }
     }
 
@@ -47,7 +47,7 @@ export default class profile extends React.Component {
                     this.setState({
                         id: snapshot.val().authid, email: snapshot.val().email, matchemail: snapshot.val().email,
                         name: snapshot.val().name, phone: snapshot.val().phone, pass: snapshot.val().password,
-                        dob: snapshot.val().dob, address: snapshot.val().address
+                        dob: snapshot.val().dob, address: snapshot.val().address,loading: false
                     })
                 }
             })
@@ -71,7 +71,7 @@ export default class profile extends React.Component {
                 if (latphone == 10) {
                     {
                         if (moment(dob).format('L') != 'invalid date') {
-                            auth().currentUser.delete();
+                            // auth().currentUser.delete();
                             // console.log('currentuser', user);
                             if (this.state.matchemail != email) {
                                 var user = auth().currentUser;
@@ -156,9 +156,9 @@ export default class profile extends React.Component {
                                 }
                             </View>
                         </View>
-                        {/* <Modal transparent={true} visible={this.state.loading}>
+                        <Modal transparent={true} visible={this.state.loading}>
                             <LoadingComponent text={'Loading'} />
-                        </Modal> */}
+                        </Modal>
                     </ScrollView>
                 </KeyboardAvoidingView>
             </SafeAreaView>

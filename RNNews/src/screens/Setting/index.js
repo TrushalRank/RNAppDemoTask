@@ -21,7 +21,7 @@ export default class login extends React.Component {
                                 <Text style={[style.falsebtntext, { padding: wp('5%'), }]}>Edit profile</Text></TouchableOpacity>
                             <TouchableOpacity style={style.btn}>
                                 <Text style={[style.falsebtntext, { padding: wp('5%'), }]}>Recommended list</Text></TouchableOpacity>
-                            <TouchableOpacity style={style.btn}>
+                            <TouchableOpacity style={style.btn}onPress={() => this.props.navigation.navigate('changedefultsetting')}>
                                 <Text style={[style.falsebtntext, { padding: wp('5%'), }]}>Change default settings</Text></TouchableOpacity>
                         </View>
                     </ScrollView>
